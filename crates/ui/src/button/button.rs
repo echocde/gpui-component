@@ -563,6 +563,7 @@ impl RenderOnce for Button {
             .child({
                 h_flex()
                     .id("label")
+                    .w_full()
                     .items_center()
                     .justify_center()
                     .button_text_size(self.size)
@@ -584,7 +585,8 @@ impl RenderOnce for Button {
                         )
                     })
                     .when_some(self.label, |this, label| {
-                        this.child(div().flex_none().line_height(relative(1.)).child(label))
+                        this.justify_between()
+                            .child(div().flex_none().line_height(relative(1.)).child(label))
                     })
                     .children(self.children)
                     .when(self.dropdown_caret, |this| {

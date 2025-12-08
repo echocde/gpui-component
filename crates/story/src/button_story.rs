@@ -1,6 +1,6 @@
 use gpui::{
     Action, App, AppContext as _, Axis, ClickEvent, Context, Entity, Focusable, InteractiveElement,
-    IntoElement, ParentElement as _, Render, Styled as _, Window, prelude::FluentBuilder, px,
+    IntoElement, ParentElement as _, Render, Styled as _, Window, div, prelude::FluentBuilder, px,
 };
 
 use gpui_component::{
@@ -155,6 +155,19 @@ impl Render for ButtonStory {
             .child(
                 section("Normal Button")
                     .max_w_lg()
+                    .child(
+                        div().w_40().child(
+                            Button::new("button-layout")
+                                .primary()
+                                .label("Button Layout")
+                                .disabled(disabled)
+                                .selected(selected)
+                                .loading(loading)
+                                .when(compact, |this| this.compact())
+                                .on_click(Self::on_click)
+                                .on_hover(Self::on_hover),
+                        ),
+                    )
                     .child(
                         Button::new("button-1")
                             .primary()
